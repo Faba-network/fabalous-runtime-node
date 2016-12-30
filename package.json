@@ -1,0 +1,23 @@
+{
+  "name": "fabalous-runtime-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Faba-network/fabalous-runtime-node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Faba-network/fabalous-runtime-node/issues"
+  },
+  "homepage": "https://github.com/Faba-network/fabalous-runtime-node#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.7.2"
+  }
+}
