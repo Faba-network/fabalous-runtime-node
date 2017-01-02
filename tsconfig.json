@@ -9,7 +9,9 @@
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true,
     "outDir": "./lib/",
-    "sourceRoot": "./"
+    "sourceRoot": "./",
+    "declaration": true,
+    "importHelpers": true
   },
   "exclude": [
     "node_modules"
