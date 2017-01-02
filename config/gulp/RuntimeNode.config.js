@@ -32,7 +32,7 @@ module.exports = function(gulp){
 
     gulp.task('node-wbp', function(done) {
         var firedDone = false;
-        webpack(backendConfig).watch(100, function(err, stats) {
+        webpack(nodeConfig).watch(100, function(err, stats) {
             console.error(err);
             console.log(stats);
             if(!firedDone) {
