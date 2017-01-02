@@ -21,7 +21,7 @@ module.exports = function(gulp){
             execMap: {
                 js: 'node'
             },
-            script: path.join(__workDir, './build/node/server.js'),
+            script: path.join(__workDir, './dist/node/server.js'),
             ignore: ['*'],
             watch: ['foo/'],
             ext: 'noop'
