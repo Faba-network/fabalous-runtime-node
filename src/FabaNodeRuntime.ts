@@ -15,6 +15,8 @@ export default class FabaNodeRuntime extends FabaCore {
         super(data);
         console.log('\x1Bc');
 
+        require('source-map-support').install();
+
         this.app = this.express();
         this.startServer();
     }
