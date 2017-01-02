@@ -65,7 +65,7 @@ export default class FabaNodeRuntime extends FabaCore {
             if (!FabaCore.events[body.identifyer]) {
                 targetEvent = new FabaEvent(body.identifyer);
             } else {
-                targetEvent = FabaCore.events[body.identifyer];
+                targetEvent = new FabaCore.events[body.identifyer].event;
             }
 
             let h: any = this.assign(targetEvent, JSON.parse(req.rawBody));
