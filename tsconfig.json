@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "lib": ["es7"],
+    "moduleResolution": "node",
+    "noEmitHelpers": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "outDir": "./lib/",
+    "sourceRoot": "./"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

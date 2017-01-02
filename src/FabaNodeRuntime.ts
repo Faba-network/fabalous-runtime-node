@@ -1,13 +1,9 @@
-/**
- * Created by joergwasmeier on 26.12.15.
- *
- *
- */
-import FabaCore, {IFabaMediatorList} from "./FabaCore";
-import FabaEvent from "./FabaEvent";
-import FabaValueObject from "./FabaValueObject";
+
 import {Application} from "express/lib/application";
-import FabaStore from "./FabaStore";
+import FabaCore from "@fabalous/core/FabaCore";
+import FabaStore from "@fabalous/core/FabaStore";
+import FabaValueObject from "@fabalous/core/FabaValueObject";
+import FabaEvent from "@fabalous/core/FabaEvent";
 
 export default class FabaNodeRuntime extends FabaCore {
     app: Application;
@@ -37,8 +33,6 @@ export default class FabaNodeRuntime extends FabaCore {
                 }
             }
         }
-
-
         return obj;
     }
 

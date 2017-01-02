@@ -1,17 +1,28 @@
 {
-  "name": "fabalous-runtime-node",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@fabalous/runtime-node",
+  "version": "0.0.1",
+  "description": "Fabalous Node runtime",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "localDebug": "npm run build && cp -Rf ./lib/* /Users/creativecode/Projekte/fabalous-runtime-node/node_modules/@fabalous/core/ ",
+    "postversion": "npm run build && git push && git push --tags && npm publish",
+    "build": "gulp clean && tsc && gulp copy_src_to_lib && gulp remove_src_folder && gulp remove_node_modules_folder",
+    "develop": "tsc -w",
+    "cleanSrc": "find . -name '*.js' -type f -delete",
+    "install": "cp -Rf ./lib/* ./ && rm -r ./lib",
+    "test": "jest --no-cache --watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Faba-network/fabalous-runtime-node.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "MVC",
+    "React",
+    "Node",
+    "Framework"
+  ],
+  "author": "Jörg Wasmeier",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Faba-network/fabalous-runtime-node/issues"
   },
@@ -19,5 +30,35 @@
   "dependencies": {
     "express": "^4.14.0",
     "socket.io": "^1.7.2"
+  },
+  "devDependencies": {
+    "@fabalous/core": "^0.2.37",
+    "jasmine": "^2.5.2",
+    "jest": "^18.0.0",
+    "jest-cli": "^18.0.0",
+    "ts-jest": "^18.0.0"
+  },
+  "jest": {
+    "globals": {
+      "__TS_CONFIG__": "tsconfig.json"
+    },
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "test/.*\\Spec.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "!src/**/*.d.ts"
+    ],
+    "coverageReporters": [
+      "lcov"
+    ],
+    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js"
   }
 }
