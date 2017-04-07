@@ -1,18 +1,30 @@
-
 import {Application} from "express/lib/application";
 import FabaCore from "@fabalous/core/FabaCore";
-import FabaStore from "@fabalous/core/FabaStore";
 import FabaValueObject from "@fabalous/core/FabaValueObject";
 import FabaEvent from "@fabalous/core/FabaEvent";
+import FabaStore from "@fabalous/core/store/FabaStore";
 
-export default class FabaNodeRuntime extends FabaCore {
+
+/**
+ * Runtime class and startpoint for node Project's
+ *
+ * Extend this class with your own logic.
+ *
+ * Need an store (FabaStore) as argument
+ */
+
+export default class FabaRuntimeNode extends FabaCore {
     app: Application;
 
     express = require('express');
     assign = require('object.assign').getPolyfill();
 
-    constructor(data:FabaStore<any>) {
-        super(data);
+    /**
+     * Constructor expects an store and register the FabaNodeMediator
+     * @param store FabaStore which is available for the commands
+     */
+    constructor(store:FabaStore<any>) {
+        super(store);
         console.log('\x1Bc');
 
         require('source-map-support').install();
@@ -21,7 +33,14 @@ export default class FabaNodeRuntime extends FabaCore {
         this.startServer();
     }
 
-    parseObject(obj) {
+    /**
+     * TODO: Reafactor or delete this?
+     *
+     * Parse objects and map it to value objects
+     * @param obj
+     * @returns {any}
+     */
+    parseObject(obj:any) {
         for (var key in obj) {
             if (obj[key] != null && obj[key].className != null) {
                 let vo: FabaValueObject = obj[key];
@@ -38,6 +57,9 @@ export default class FabaNodeRuntime extends FabaCore {
         return obj;
     }
 
+    /**
+     * Start the Webserver to handle all HTTP requests
+     */
     private startServer() {
         this.app.use(function (req: any, res, next) {
             var data = "";
@@ -61,7 +83,7 @@ export default class FabaNodeRuntime extends FabaCore {
         });
 
         this.app.post('/', (req: any, res: any) => {
-            let body = JSON.parse(req.rawBody);
+            const body = JSON.parse(req.rawBody);
 
             let targetEvent: FabaEvent;
             if (!FabaCore.events[body.identifyer]) {
@@ -70,34 +92,26 @@ export default class FabaNodeRuntime extends FabaCore {
                 targetEvent = new FabaCore.events[body.identifyer].event;
             }
 
-            let h: any = this.assign(targetEvent, JSON.parse(req.rawBody));
-            h = this.parseObject(h);
-            h.dispatch().then((event) => {
+            this.parseObject(this.assign(targetEvent, body)).dispatch().then((event) => {
                 try {
                     res.send(JSON.stringify(event));
                 } catch(e){
                     console.error(e);
                 }
-
             });
         });
 
-        var port = 3120;
+        let port = 3120;
         this.app.listen(port);
     }
 
+    /**
+     * Get the whole raw body of a request
+     * @param req
+     * @param res
+     * @param next
+     */
     private rawBody(req, res, next) {
-        req.setEncoding('utf8');
-        req.rawBody = '';
-        req.on('data', function (chunk) {
-            req.rawBody += chunk;
-        });
-        req.on('end', function () {
-            next();
-        });
-    }
-
-    private rawData(req, res, next) {
         req.setEncoding('utf8');
         req.rawBody = '';
         req.on('data', function (chunk) {

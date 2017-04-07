@@ -7,7 +7,6 @@
     "build": "gulp clean && tsc && gulp copy_src_to_lib && gulp remove_src_folder && gulp remove_node_modules_folder",
     "develop": "tsc -w",
     "cleanSrc": "find . -name '*.js' -type f -delete",
-    "install": "cp -Rf ./lib/* ./ && rm -r ./lib",
     "test": "jest --no-cache --watch"
   },
   "repository": {
@@ -27,17 +26,16 @@
   },
   "homepage": "https://github.com/Faba-network/fabalous-runtime-node#readme",
   "dependencies": {
-    "express": "^4.14.0",
-    "socket.io": "^1.7.2",
-    "source-map-support": "^0.4.8",
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3",
+    "source-map-support": "^0.4.14",
     "tracer": "^0.8.7"
   },
   "devDependencies": {
-    "@fabalous/core": "^0.2.37",
-    "jasmine": "^2.5.2",
-    "jest": "^18.0.0",
-    "jest-cli": "^18.0.0",
-    "ts-jest": "^18.0.0"
+    "@fabalous/core": "^0.2.58",
+    "jest": "^19.0.2",
+    "jest-cli": "^19.0.2",
+    "ts-jest": "^19.0.8"
   },
   "jest": {
     "globals": {

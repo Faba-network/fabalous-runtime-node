@@ -1,8 +1,6 @@
 import FabaCoreCommand from "@fabalous/core/FabaCoreCommand";
 import FabaEvent from "@fabalous/core/FabaEvent";
-/**
- * Created by creativecode on 30.12.16.
- */
+
 
 export class FabaNodeCommand<TStore> extends FabaCoreCommand<TStore>{
     emitToUser(event:FabaEvent, user?:any){
