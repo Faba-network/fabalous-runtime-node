@@ -7,6 +7,7 @@
     "build": "gulp clean && tsc && gulp copy_src_to_lib && gulp remove_src_folder && gulp remove_node_modules_folder",
     "develop": "tsc -w",
     "cleanSrc": "find . -name '*.js' -type f -delete",
+    "install": "cp -Rf ./lib/* ./ && rm -r ./lib",
     "test": "jest --no-cache --watch"
   },
   "repository": {
