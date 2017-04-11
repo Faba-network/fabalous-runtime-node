@@ -23,14 +23,14 @@ export default class FabaRuntimeNode extends FabaCore {
      * Constructor expects an store and register the FabaNodeMediator
      * @param store FabaStore which is available for the commands
      */
-    constructor(store:FabaStore<any>) {
+    constructor(store:FabaStore<any>, port:number) {
         super(store);
         //console.log('\x1Bc');
 
         require('source-map-support').install();
 
         this.app = this.express();
-        this.startServer();
+        this.startServer(port);
     }
 
     /**
@@ -60,9 +60,9 @@ export default class FabaRuntimeNode extends FabaCore {
     /**
      * Start the Webserver to handle all HTTP requests
      */
-    private startServer() {
+    private startServer(port = 3120) {
         this.app.use(function (req: any, res, next) {
-            var data = "";
+            let data = "";
             req.on('data', function (chunk) {
                 data += chunk
             });
@@ -101,7 +101,6 @@ export default class FabaRuntimeNode extends FabaCore {
             });
         });
 
-        let port = 3120;
         this.app.listen(port);
     }
 
