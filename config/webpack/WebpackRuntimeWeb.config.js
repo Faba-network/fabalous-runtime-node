@@ -13,6 +13,14 @@ fs.readdirSync('node_modules')
         nodeModules[mod] = 'commonjs ' + mod;
     });
 
+function getAlias(){
+    try {
+        return __alias;
+    } catch (e){
+        return {};
+    }
+}
+
 module.exports = {
     entry:entry,
     target:'node',
@@ -30,7 +38,8 @@ module.exports = {
     devtool: 'source-map',
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
+        alias: getAlias()
     },
 
     recordsPath: path.join(__workDir, './dist/node/_records'),
@@ -67,9 +76,11 @@ module.exports = {
     plugins:[
         new webpack.NormalModuleReplacementPlugin(/\.(gif|png|less|css)$/, 'node-noop'),
         new webpack.DefinePlugin({
-            CLIENT: false,
-            SERVER: true,
-            TEST:false
-        })
+            'process.env.NODE_ENV':  JSON.stringify("development"),
+            'process.env.FABALOUS_RUNTIME': JSON.stringify("web"),
+            'process.env.FABALOUS_DEBUG': JSON.stringify(1)
+        }),
+        new ProgressBarPlugin(),
+        new webpack.NamedModulesPlugin()
     ]
 };
