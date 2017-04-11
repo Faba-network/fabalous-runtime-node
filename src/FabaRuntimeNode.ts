@@ -25,7 +25,7 @@ export default class FabaRuntimeNode extends FabaCore {
      */
     constructor(store:FabaStore<any>) {
         super(store);
-        console.log('\x1Bc');
+        //console.log('\x1Bc');
 
         require('source-map-support').install();
 

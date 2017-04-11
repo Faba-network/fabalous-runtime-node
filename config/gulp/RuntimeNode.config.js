@@ -1,3 +1,16 @@
+/*
+     var MemoryFS = require("memory-fs");
+     var webpack = require("webpack");
+
+     var fs = new MemoryFS();
+     var compiler = webpack({ ... });
+     compiler.outputFileSystem = fs;
+     compiler.run(function(err, stats) {
+     // ...
+     var fileContent = fs.readFileSync("...");
+     });
+ */
+
 module.exports = function(gulp){
     var path = require('path');
     var nodemon = require('nodemon');
@@ -33,8 +46,10 @@ module.exports = function(gulp){
     gulp.task('node-wbp', function(done) {
         var firedDone = false;
         webpack(nodeConfig).watch(100, function(err, stats) {
-            console.error(err);
-            console.log(stats);
+            console.log(stats.toString({
+                chunks: false, // Makes the build much quieter
+                colors: true
+            }));
             if(!firedDone) {
                 firedDone = true;
                 done();
