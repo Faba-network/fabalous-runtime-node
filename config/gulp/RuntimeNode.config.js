@@ -15,6 +15,7 @@ module.exports = function(gulp){
     var path = require('path');
     var nodemon = require('nodemon');
     var webpack = require('webpack');
+    var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
     var nodeConfig = require(path.join(__dirname + "/../webpack/WebpackRuntimeWeb.config.js"));
     function onBuild(done) {

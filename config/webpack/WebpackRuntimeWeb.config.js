@@ -3,6 +3,7 @@ var fs = require('fs');
 var webpack = require('webpack');
 
 var entry = ['./src/A_Server.ts'];
+var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 var nodeModules = {};
 fs.readdirSync('node_modules')
