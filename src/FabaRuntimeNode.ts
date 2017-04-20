@@ -14,7 +14,7 @@ import FabaStore from "@fabalous/core/store/FabaStore";
  */
 
 export default class FabaRuntimeNode extends FabaCore {
-    app: Application;
+    app: any;
 
     express = require('express');
     assign = require('object.assign').getPolyfill();
