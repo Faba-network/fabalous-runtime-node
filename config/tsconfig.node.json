@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "sourceMap": true,
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "moduleResolution": "node",
+    "rootDir": "./src/",
+    "importHelpers": true,
+    "lib": [
+      "es7"
+    ],
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "baseUrl": "./",
+    "paths": {
+      "assets/*":["./src/common/assets/*"],
+      "src/*":["./src/*"]
+    }
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "forkCheckerSilent": true,
+    "useBabel": false,
+    "useCache": true,
+    "skipDeclarationFilesCheck": true,
+    "cacheDirectory":"awNodeCache"
+  },
+  "exclude": [
+    "node_modules",
+    "test"
+  ]
+}

@@ -69,7 +69,7 @@ module.exports = {
                     path.join(__workDir, './src/')
                 ],
                 test: /\.tsx?$/,
-                loader: 'awesome-typescript-loader'
+                loader: 'awesome-typescript-loader?configFileName='+path.join(__workDir, './node_modules/@fabalous/runtime-node/config/tsconfig.node.json')
             }
         ],
     },
