@@ -13,17 +13,18 @@
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
-    "rootDir": "./src/",
+    "rootDir": "./../../../../src/",
     "importHelpers": true,
     "lib": [
-      "es7"
+      "es7",
+      "dom"
     ],
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true,
     "baseUrl": "./",
     "paths": {
-      "assets/*":["./src/common/assets/*"],
-      "src/*":["./src/*"]
+      "assets/*":["./../../../../src/common/assets/*"],
+      "src/*":["./../../../../src/*"]
     }
   },
   "awesomeTypescriptLoaderOptions": {
@@ -32,10 +33,10 @@
     "useBabel": false,
     "useCache": true,
     "skipDeclarationFilesCheck": true,
-    "cacheDirectory":"awNodeCache"
+    "cacheDirectory":".awNodeCache"
   },
   "exclude": [
-    "node_modules",
-    "test"
+    "./../../../../node_modules",
+    "./../../../../test"
   ]
 }
