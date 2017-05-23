@@ -1,6 +1,6 @@
 {
   "name": "@fabalous/runtime-node",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Fabalous Node runtime",
   "scripts": {
     "postversion": "npm run build && git push && git push --tags && npm publish",
