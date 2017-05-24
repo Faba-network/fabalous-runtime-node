@@ -22,6 +22,14 @@ function getAlias(){
     }
 }
 
+function getMaxFileSize(){
+    try {
+        return __maxAssetSize;
+    } catch (e){
+        return 100000
+    }
+}
+
 module.exports = {
     entry:entry,
     target:'node',
@@ -70,12 +78,19 @@ module.exports = {
                 ],
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader?configFileName='+path.join(__workDir, './node_modules/@fabalous/runtime-node/config/tsconfig.node.json')
+            },
+            {
+                test: /\.(eot|woff|woff2|ttf|svg|png|jpg|mp3)$/,
+                loader: `url-loader?limit=${getMaxFileSize()}&name=assets/[name].[ext]`,
+                include: [
+                    path.join(__workDir, './src/')
+                ]
             }
         ],
     },
 
     plugins:[
-        new webpack.NormalModuleReplacementPlugin(/\.(gif|png|less|css)$/, 'node-noop'),
+        new webpack.NormalModuleReplacementPlugin(/\.(mp4)$/, 'node-noop'),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV':  JSON.stringify("development"),
             'process.env.FABALOUS_RUNTIME': JSON.stringify("web"),
