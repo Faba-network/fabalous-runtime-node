@@ -5,6 +5,14 @@ var webpack = require('webpack');
 var entry = ['./src/A_Server.ts'];
 var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
+function getGitHash(){
+    try {
+        return __gitHash;
+    } catch (e){
+        return "";
+    }
+}
+
 var nodeModules = {};
 fs.readdirSync('node_modules')
     .filter(function(x) {
@@ -81,7 +89,7 @@ module.exports = {
             },
             {
                 test: /\.(eot|woff|woff2|ttf|svg|png|jpg|mp3)$/,
-                loader: `url-loader?limit=${getMaxFileSize()}&name=assets/[name].[ext]`,
+                loader: `url-loader?limit=${getMaxFileSize()}&name=assets/[name]_${getGitHash()}.[ext]`,
                 include: [
                     path.join(__workDir, './src/')
                 ]
