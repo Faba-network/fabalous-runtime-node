@@ -102,7 +102,9 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV':  JSON.stringify("development"),
             'process.env.FABALOUS_RUNTIME': JSON.stringify("web"),
-            'process.env.FABALOUS_DEBUG': JSON.stringify(1)
+            'process.env.FABALOUS_DEBUG': JSON.stringify(1),
+            'process.env.HASH': JSON.stringify(getGitHash())
+
         }),
         new ProgressBarPlugin(),
         new webpack.NamedModulesPlugin()
