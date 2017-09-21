@@ -89,7 +89,7 @@ module.exports = {
             },
             {
                 test: /\.(eot|woff|woff2|ttf|svg|png|jpg|mp3)$/,
-                loader: `url-loader?limit=${getMaxFileSize()}&name=assets/[name]_${getGitHash()}.[ext]`,
+                loader: `url-loader?limit=${getMaxFileSize()}&name=[name]_${getGitHash()}.[ext]&publicPath=../assets/&outputPath=../web/assets/`,
                 include: [
                     path.join(__workDir, './src/')
                 ]
