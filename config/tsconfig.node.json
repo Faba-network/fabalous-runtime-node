@@ -25,13 +25,17 @@
     "paths": {
       "assets/*":["./../../../../src/common/assets/*"],
       "src/*":["./../../../../src/*"]
-    }
+    },
+    "typeRoots":[
+      "./../../../../node_modules/@types"
+    ]
   },
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
     "forkCheckerSilent": true,
     "useBabel": false,
     "useCache": true,
+    "instance":"fab-node",
     "skipDeclarationFilesCheck": true,
     "cacheDirectory":".awNodeCache"
   },
