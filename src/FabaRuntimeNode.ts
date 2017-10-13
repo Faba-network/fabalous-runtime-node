@@ -108,6 +108,7 @@ export default class FabaRuntimeNode extends FabaCore {
 
             this.parseObject(Object.assign(targetEvent, body)).dispatch().then((event) => {
                 try {
+                    req.session = event.sessionData;
                     event.sessionData = null;
                     delete event.sessionData;
                     res.send(JSON.stringify(event));
