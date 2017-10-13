@@ -3,7 +3,9 @@ import FabaCore from "@fabalous/core/FabaCore";
 import FabaValueObject from "@fabalous/core/FabaValueObject";
 import FabaEvent from "@fabalous/core/FabaEvent";
 import FabaStore from "@fabalous/core/store/FabaStore";
-
+import {ServerResponse} from "http";
+var session = require('express-session');
+var helmet = require('helmet');
 
 /**
  * Runtime class and startpoint for node Project's
@@ -17,19 +19,24 @@ export default class FabaRuntimeNode extends FabaCore {
     app: any;
 
     express = require('express');
-    assign = require('object.assign').getPolyfill();
 
     /**
      * Constructor expects an store and register the FabaNodeMediator
      * @param store FabaStore which is available for the commands
      */
-    constructor(store:FabaStore<any>, port:number) {
+    constructor(store:FabaStore<any>, port:number, sessionSecret:string) {
         super(store);
         //console.log('\x1Bc');
 
         require('source-map-support').install();
 
         this.app = this.express();
+        this.app.use(helmet({}));
+        this.app.use(session({
+            secret: sessionSecret,
+            cookie: { maxAge: 60000, httpOnly: true }
+        }));
+
         this.startServer(port);
     }
 
@@ -46,9 +53,8 @@ export default class FabaRuntimeNode extends FabaCore {
                 let vo: FabaValueObject = obj[key];
                 try {
                     let neVoInst: any = new FabaCore.vos[vo.className];
-                    obj[key] = this.assign(neVoInst, vo);
+                    obj[key] = Object.assign(neVoInst, vo);
                     obj[key] = this.parseObject(obj[key]);
-
                 } catch (e) {
                     throw e;
                 }
@@ -79,6 +85,12 @@ export default class FabaRuntimeNode extends FabaCore {
         });
 
         this.app.get('/test', function (req: any, res: any) {
+            if (req.session.views) {
+                req.session.views++
+            } else {
+                req.session.views = 1
+            }
+            console.log(req.session);
             res.send("Hallo welt");
         });
 
@@ -92,8 +104,12 @@ export default class FabaRuntimeNode extends FabaCore {
                 targetEvent = new FabaCore.events[body.identifyer].event;
             }
 
-            this.parseObject(this.assign(targetEvent, body)).dispatch().then((event) => {
+            body.sessionData = req.session;
+
+            this.parseObject(Object.assign(targetEvent, body)).dispatch().then((event) => {
                 try {
+                    event.sessionData = null;
+                    delete event.sessionData;
                     res.send(JSON.stringify(event));
                 } catch(e){
                     console.error(e);

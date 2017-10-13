@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "target": "es5",
+    "module": "esnext",
     "sourceMap": true,
-    "lib": ["es7"],
+    "lib": ["esnext"],
     "moduleResolution": "node",
     "noEmitHelpers": true,
     "forceConsistentCasingInFileNames": true,
