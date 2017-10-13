@@ -24,7 +24,7 @@ export default class FabaRuntimeNode extends FabaCore {
      * Constructor expects an store and register the FabaNodeMediator
      * @param store FabaStore which is available for the commands
      */
-    constructor(store:FabaStore<any>, port:number, sessionSecret:string) {
+    constructor(store:FabaStore<any>, port:number, sessionSecret:string = "sessionFabalous") {
         super(store);
         //console.log('\x1Bc');
 
