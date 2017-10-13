@@ -32,10 +32,22 @@ export default class FabaRuntimeNode extends FabaCore {
 
         this.app = this.express();
         this.app.use(helmet({}));
-        this.app.use(session({
-            secret: sessionSecret,
-            cookie: { maxAge: 60000, httpOnly: true }
-        }));
+
+        if (process.env.NODE_ENV == "development"){
+            this.app.use(session({
+                secret: sessionSecret,
+                resave: false,
+                saveUninitialized: true,
+                cookie: {maxAge: 60000, httpOnly: true}
+            }));
+        } else {
+            this.app.use(session({
+                secret: sessionSecret,
+                resave: false,
+                saveUninitialized: true,
+                cookie: { maxAge: 60000, httpOnly: true, secure: true }
+            }));
+        }
 
         this.startServer(port);
     }
