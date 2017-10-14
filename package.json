@@ -6,8 +6,8 @@
     "postversion": "npm run build && git push && git push --tags && npm publish",
     "build": "gulp clean && tsc && gulp copy_src_to_lib && gulp remove_src_folder && gulp remove_node_modules_folder",
     "develop": "tsc -w",
-    "cleanSrc": "find . -name '*.js' -type f -delete",
     "install": "shx cp -Rf ./lib/* ./ && shx rm -r ./lib",
+    "cleanSrc": "find . -name '*.js' -type f -delete",
     "test": "jest --no-cache --watch"
   },
   "repository": {
