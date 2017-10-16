@@ -5,7 +5,7 @@ import FabaEvent from "@fabalous/core/FabaEvent";
 import FabaStore from "@fabalous/core/store/FabaStore";
 import {ServerResponse} from "http";
 var session = require('express-session');
-var helmet = require('helmet');
+//var helmet = require('helmet');
 
 /**
  * Runtime class and startpoint for node Project's
@@ -31,7 +31,7 @@ export default class FabaRuntimeNode extends FabaCore {
         require('source-map-support').install();
 
         this.app = this.express();
-        this.app.use(helmet({}));
+       // this.app.use(helmet({}));
 
         if (process.env.NODE_ENV == "development"){
             this.app.use(session({
