@@ -4,7 +4,9 @@ import FabaValueObject from "@fabalous/core/FabaValueObject";
 import FabaEvent from "@fabalous/core/FabaEvent";
 import FabaStore from "@fabalous/core/store/FabaStore";
 import {ServerResponse} from "http";
-var session = require('express-session');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
 //var helmet = require('helmet');
 
 /**
@@ -28,6 +30,13 @@ export default class FabaRuntimeNode extends FabaCore {
         super(store);
         //console.log('\x1Bc');
 
+        let sessionStore = new MongoDBStore(
+            {
+                uri: 'mongodb://localhost:27017/connect_mongodb_session_test',
+                collection: 'sessions'
+            }
+        );
+
         require('source-map-support').install();
 
         this.app = this.express();
@@ -38,14 +47,16 @@ export default class FabaRuntimeNode extends FabaCore {
                 secret: sessionSecret,
                 resave: false,
                 saveUninitialized: true,
-                cookie: {maxAge: 60000, httpOnly: true}
+                cookie: {maxAge: 60000, httpOnly: true},
+                store: sessionStore
             }));
         } else {
             this.app.use(session({
                 secret: sessionSecret,
                 resave: false,
                 saveUninitialized: true,
-                cookie: { maxAge: 60000, httpOnly: true, secure: true }
+                cookie: { maxAge: 60000, httpOnly: true, secure: true },
+                store: sessionStore
             }));
         }
 
