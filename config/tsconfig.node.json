@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "es2016",
+    "module": "esnext",
     "sourceMap": true,
     "jsx": "react",
     "experimentalDecorators": true,
@@ -16,29 +16,16 @@
     "rootDir": "./../../../../src/",
     "importHelpers": true,
     "lib": [
-      "es7",
+      "esnext",
       "dom"
     ],
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true,
-    "baseUrl": "./",
-    "paths": {
-      "assets/*":["./../../../../src/common/assets/*"],
-      "src/*":["./../../../../src/*"]
-    },
-    "typeRoots":[
-      "./../../../../node_modules/@types"
-    ]
+    "baseUrl": "./"
   },
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "forkCheckerSilent": true,
-    "useBabel": false,
-    "useCache": true,
-    "instance":"fab-node",
-    "skipDeclarationFilesCheck": true,
-    "cacheDirectory":".awNodeCache"
-  },
+  "include": [
+    "./../../../../src/"
+  ],
   "exclude": [
     "./../../../../node_modules",
     "./../../../../test"
