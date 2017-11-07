@@ -26,21 +26,29 @@ export default class FabaRuntimeNode extends FabaCore {
      * Constructor expects an store and register the FabaNodeMediator
      * @param store FabaStore which is available for the commands
      */
-    constructor(store:FabaStore<any>, port:number, sessionSecret:string = "sessionFabalous") {
+    constructor(store:FabaStore<any>, port:number, sessionSecret:string = "sessionFabalous", dbSession:boolean = false) {
         super(store);
+        require('source-map-support').install();
+
         //console.log('\x1Bc');
 
+        this.app = this.express();
+       // this.app.use(helmet({}));
+
+        if (dbSession){
+            this.initSession(sessionSecret);
+        }
+
+        this.startServer(port);
+    }
+
+    private initSession(sessionSecret){
         let sessionStore = new MongoDBStore(
             {
                 uri: 'mongodb://localhost:27017/connect_mongodb_session_test',
                 collection: 'sessions'
             }
         );
-
-        require('source-map-support').install();
-
-        this.app = this.express();
-       // this.app.use(helmet({}));
 
         if (process.env.NODE_ENV == "development"){
             this.app.use(session({
@@ -59,8 +67,6 @@ export default class FabaRuntimeNode extends FabaCore {
                 store: sessionStore
             }));
         }
-
-        this.startServer(port);
     }
 
     /**
