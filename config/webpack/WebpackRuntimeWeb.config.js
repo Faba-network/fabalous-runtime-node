@@ -85,7 +85,7 @@ module.exports = {
                     path.join(__workDir, './src/')
                 ],
                 test: /\.tsx?$/,
-                loader: 'awesome-typescript-loader?configFileName='+path.join(__workDir, './node_modules/@fabalous/runtime-node/config/tsconfig.node.json')
+                loader: 'ts-loader?configFile='+path.join(__workDir, './node_modules/@fabalous/runtime-node/config/tsconfig.node.json')
             },
             {
                 test: /\.(eot|woff|woff2|ttf|svg|png|jpg|mp3|mp4)$/,
@@ -100,7 +100,7 @@ module.exports = {
     plugins:[
         new webpack.DefinePlugin({
             'process.env.NODE_ENV':  JSON.stringify("development"),
-            'process.env.FABALOUS_RUNTIME': JSON.stringify("web"),
+            'process.env.FABALOUS_RUNTIME': JSON.stringify("node"),
             'process.env.FABALOUS_DEBUG': JSON.stringify(1),
             'process.env.HASH': JSON.stringify(getGitHash())
 
