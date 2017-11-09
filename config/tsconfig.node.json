@@ -16,7 +16,8 @@
     "rootDir": "./../../../../src/",
     "importHelpers": true,
     "lib": [
-      "esnext"
+      "esnext",
+      "dom"
     ],
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true,
