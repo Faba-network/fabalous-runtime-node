@@ -20,7 +20,7 @@
       "dom"
     ],
     "forceConsistentCasingInFileNames": true,
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "baseUrl": "./"
   },
   "include": [
