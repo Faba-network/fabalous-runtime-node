@@ -61,31 +61,16 @@ module.exports = {
 
     recordsPath: path.join(__workDir, './dist/node/_records'),
 
-    stats: {
-        colors: true,
-        hash: false,
-        version: true,
-        timings: true,
-        assets: false,
-        chunks: false,
-        modules: false,
-        reasons: false,
-        children: false,
-        source: false,
-        errors: true,
-        errorDetails: true,
-        warnings: false,
-        publicPath: false
-    },
+    stats: "minimal",
 
     module: {
-        loaders: [
+        rules: [
             {
-                include:[
-                    path.join(__workDir, './src/')
-                ],
-                test: /\.tsx?$/,
-                loader: 'ts-loader?configFile='+path.join(__workDir, './node_modules/@fabalous/runtime-node/config/tsconfig.node.json')
+                loader: 'ts-loader',
+                query: {
+                    transpileOnly: true,
+                    configFile:path.join(__workDir, getCache())
+                }
             },
             {
                 test: /\.(eot|woff|woff2|ttf|svg|png|jpg|mp3|mp4)$/,
