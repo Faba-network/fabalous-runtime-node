@@ -62,7 +62,7 @@ module.exports = {
     recordsPath: path.join(__workDir, './dist/node/_records'),
 
     stats: "minimal",
-
+    mode:"development",
     module: {
         rules: [
             {
