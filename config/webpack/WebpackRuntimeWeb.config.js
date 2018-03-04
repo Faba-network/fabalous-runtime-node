@@ -69,7 +69,7 @@ module.exports = {
                 loader: 'ts-loader',
                 query: {
                     transpileOnly: true,
-                    configFile:path.join(__workDir, getCache())
+                    configFile:path.join(path.join(__workDir, './node_modules/@fabalous/runtime-node/config/tsconfig.node.json'))
                 }
             },
             {
