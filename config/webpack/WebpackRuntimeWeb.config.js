@@ -38,6 +38,36 @@ function getMaxFileSize(){
     }
 }
 
+function getRules(){
+    const rules = [
+        {
+            test: /\.tsx?$/,
+            loader: 'ts-loader',
+            query: {
+                transpileOnly: true,
+                configFile:path.join(path.join(__workDir, './node_modules/@fabalous/runtime-node/config/tsconfig.node.json'))
+            }
+        },
+        {
+            test: /\.(eot|woff|woff2|ttf|png|jpg|mp3|mp4)$/,
+            loader: `url-loader?limit=${getMaxFileSize()}&name=assets/[name]_${getGitHash()}.[ext]`,
+            include: [
+                path.join(__workDir, './src/')
+            ]
+        },
+        {
+            test: /\.svg$/,
+            loader: 'svg-inline-loader'
+        }
+    ];
+
+    try{
+        if (__rules) return rules.concat(__rules);
+    } catch (e){
+        return rules;
+    }
+}
+
 module.exports = {
     entry:entry,
     target:'node',
@@ -64,22 +94,7 @@ module.exports = {
     stats: "minimal",
     mode:"development",
     module: {
-        rules: [
-            {
-                loader: 'ts-loader',
-                query: {
-                    transpileOnly: true,
-                    configFile:path.join(path.join(__workDir, './node_modules/@fabalous/runtime-node/config/tsconfig.node.json'))
-                }
-            },
-            {
-                test: /\.(eot|woff|woff2|ttf|svg|png|jpg|mp3|mp4)$/,
-                loader: `url-loader?limit=${getMaxFileSize()}&name=assets/[name]_${getGitHash()}.[ext]`,
-                include: [
-                    path.join(__workDir, './src/')
-                ]
-            }
-        ],
+        rules: getRules()
     },
 
     plugins:[
